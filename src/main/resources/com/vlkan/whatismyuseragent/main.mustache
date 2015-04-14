@@ -1,0 +1,199 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>What is my User-Agent?</title>
+    <link rel="stylesheet" href="/assets/main.css" type="text/css"/>
+</head>
+<body>
+
+<div>User-Agent: {{userAgent.get}}</div>
+
+<hr/>
+
+<form method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <label for="deviceType">Device Type:</label>
+        <input id="deviceType"
+               name="deviceType"
+               value="{{deviceProfile.get.deviceType}}"/>
+    </div>
+    <div>
+        <label for="vendor">vendor:</label>
+        <input id="vendor"
+               name="vendor"
+               value="{{deviceProfile.get.deviceAttributes.vendor}}"/>
+    </div>
+    <div>
+        <label for="model">model:</label>
+        <input id="model"
+               name="model"
+               value="{{deviceProfile.get.deviceAttributes.model}}"/>
+    </div>
+    <div>
+        <label for="displayDimensions">displayDimensions:</label>
+        <input id="displayDimensions"
+               name="displayDimensions"
+               value="{{deviceProfile.get.deviceAttributes.displayDimensions}}"/>
+    </div>
+    <div>
+        <label for="mobileBrowser">mobileBrowser:</label>
+        <input id="mobileBrowser"
+               name="mobileBrowser"
+               value="{{deviceProfile.get.deviceAttributes.mobileBrowser}}"/>
+    </div>
+    <div>
+        <label for="mobileBrowserVersion">mobileBrowserVersion:</label>
+        <input id="mobileBrowserVersion"
+               name="mobileBrowserVersion"
+               value="{{deviceProfile.get.deviceAttributes.mobileBrowserVersion}}"/>
+    </div>
+    <div>
+        <label for="deviceOs">deviceOs:</label>
+        <input id="deviceOs"
+               name="deviceOs"
+               value="{{deviceProfile.get.deviceAttributes.deviceOs}}"/>
+    </div>
+    <div>
+        <label for="deviceOsVersion">deviceOsVersion:</label>
+        <input id="deviceOsVersion"
+               name="deviceOsVersion"
+               value="{{deviceProfile.get.deviceAttributes.deviceOsVersion}}"/>
+    </div>
+    <div>
+        <label for="nokiaEdition">nokiaEdition:</label>
+        <input id="nokiaEdition"
+               name="nokiaEdition"
+               value="{{deviceProfile.get.deviceAttributes.nokiaEdition}}"/>
+    </div>
+    <div>
+        <label for="nokiaSeries">nokiaSeries:</label>
+        <input id="nokiaSeries"
+               name="nokiaSeries"
+               value="{{deviceProfile.get.deviceAttributes.nokiaSeries}}"/>
+    </div>
+    <div>
+        <label for="dualOrientation">dualOrientation:</label>
+        <input id="dualOrientation"
+               name="dualOrientation"
+               value="{{deviceProfile.get.deviceAttributes.dualOrientation}}"/>
+    </div>
+    <div>
+        <label for="inputDevice">inputDevice:</label>
+        <input id="inputDevice"
+               name="inputDevice"
+               value="{{deviceProfile.get.deviceAttributes.inputDevice}}"/>
+    </div>
+    <div>
+        <label for="wirelessDevice">wirelessDevice:</label>
+        <input id="wirelessDevice"
+               name="wirelessDevice"
+               value="{{deviceProfile.get.deviceAttributes.wirelessDevice}}"/>
+    </div>
+    <div>
+        <label for="tablet">tablet:</label>
+        <input id="tablet"
+               name="tablet"
+               value="{{deviceProfile.get.deviceAttributes.tablet}}"/>
+    </div>
+    <div>
+        <label for="desktop">desktop:</label>
+        <input id="desktop"
+               name="desktop"
+               value="{{deviceProfile.get.deviceAttributes.desktop}}"/>
+    </div>
+    <div>
+        <label for="bot">bot:</label>
+        <input id="bot"
+               name="bot"
+               value="{{deviceProfile.get.deviceAttributes.bot}}"/>
+    </div>
+    <div>
+        <label for="ajaxSupportJavaScript">ajaxSupportJavaScript:</label>
+        <input id="ajaxSupportJavaScript"
+               name="ajaxSupportJavaScript"
+               value="{{deviceProfile.get.deviceAttributes.ajaxSupportJavaScript}}"/>
+    </div>
+    <div>
+        <label for="ajaxSupportGetElementById">ajaxSupportGetElementById:</label>
+        <input id="ajaxSupportGetElementById"
+               name="ajaxSupportGetElementById"
+               value="{{deviceProfile.get.deviceAttributes.ajaxSupportGetElementById}}"/>
+    </div>
+    <div>
+        <label for="ajaxSupportInnerHtml">ajaxSupportInnerHtml:</label>
+        <input id="ajaxSupportInnerHtml"
+               name="ajaxSupportInnerHtml"
+               value="{{deviceProfile.get.deviceAttributes.ajaxSupportInnerHtml}}"/>
+    </div>
+    <div>
+        <label for="ajaxManipulateDom">ajaxManipulateDom:</label>
+        <input id="ajaxManipulateDom"
+               name="ajaxManipulateDom"
+               value="{{deviceProfile.get.deviceAttributes.ajaxManipulateDom}}"/>
+    </div>
+    <div>
+        <label for="ajaxManipulateCss">ajaxManipulateCss:</label>
+        <input id="ajaxManipulateCss"
+               name="ajaxManipulateCss"
+               value="{{deviceProfile.get.deviceAttributes.ajaxManipulateCss}}"/>
+    </div>
+    <div>
+        <label for="ajaxSupportEvents">ajaxSupportEvents:</label>
+        <input id="ajaxSupportEvents"
+               name="ajaxSupportEvents"
+               value="{{deviceProfile.get.deviceAttributes.ajaxSupportEvents}}"/>
+    </div>
+    <div>
+        <label for="ajaxSupportEventListener">ajaxSupportEventListener:</label>
+        <input id="ajaxSupportEventListener"
+               name="ajaxSupportEventListener"
+               value="{{deviceProfile.get.deviceAttributes.ajaxSupportEventListener}}"/>
+    </div>
+    <div>
+        <label for="xhtmlFormatAsCssProperty">xhtmlFormatAsCssProperty:</label>
+        <input id="xhtmlFormatAsCssProperty"
+               name="xhtmlFormatAsCssProperty"
+               value="{{deviceProfile.get.deviceAttributes.xhtmlFormatAsCssProperty}}"/>
+    </div>
+    <div>
+        <label for="xhtmlFormatAsAttribute">xhtmlFormatAsAttribute:</label>
+        <input id="xhtmlFormatAsAttribute"
+               name="xhtmlFormatAsAttribute"
+               value="{{deviceProfile.get.deviceAttributes.xhtmlFormatAsAttribute}}"/>
+    </div>
+    <div>
+        <label for="marketingName">marketingName:</label>
+        <input id="marketingName"
+               name="marketingName"
+               value="{{deviceProfile.get.deviceAttributes.marketingName}}"/>
+    </div>
+    <div>
+        <label for="imageInlining">imageInlining:</label>
+        <input id="imageInlining"
+               name="imageInlining"
+               value="{{deviceProfile.get.deviceAttributes.imageInlining}}"/>
+    </div>
+    <div>
+        <label for="from">from:</label>
+        <input id="from"
+               name="from"
+               value="{{deviceProfile.get.deviceAttributes.from}}"/>
+    </div>
+    <div>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+<hr/>
+
+<div>Enumerated attributes:</div>
+<ul>
+    <li><strong>Device Types:</strong>{{deviceTypes}}</li>
+    <li><strong>Device OS:</strong>{{deviceOses}}</li>
+    <li><strong>Mobile Browser:</strong>{{mobileBrowsers}}</li>
+    <li><strong>Input Device:</strong>{{inputDevices}}</li>
+</ul>
+
+</body>
+</html>
