@@ -12,6 +12,7 @@ import lombok.Value;
 
 import javax.annotation.concurrent.Immutable;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class ApacheDeviceAttributes extends DeviceAttributes {
 
     public transient final static ImmutableSet<String> VALID_ATTRIBUTES =
                 Arrays.stream(ApacheDeviceAttributes.class.getDeclaredFields())
+                        .filter(field -> (field.getModifiers() & Modifier.TRANSIENT) == 0)
                         .map(Field::getName).collect(toImmutableSet());
 
     private final Optional<String> vendor;
