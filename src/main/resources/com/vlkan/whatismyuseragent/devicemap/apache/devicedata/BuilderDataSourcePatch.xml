@@ -18,7 +18,7 @@
 <ODDR>
     <version>
         <ver>1.0.2</ver>
-        <last_updated>2014-12-30 18:18:00</last_updated>
+        <last_updated>2015-04-15 21:00:00</last_updated>
         <official_url>http://devicemap.apache.org</official_url>
         <statement>Licensed under http://www.apache.org/licenses/LICENSE-2.0</statement>
     </version>
@@ -26,12 +26,76 @@
         <builder class="org.apache.devicemap.simpleddr.builder.device.AndroidDeviceBuilder">
         </builder>
         <builder class="org.apache.devicemap.simpleddr.builder.device.WinPhoneDeviceBuilder">
+            <device id="Lumia 1020">
+                <list>
+                    <value>NOKIA; 909</value>
+                </list>
+            </device>
+            <device id="Lumia630">
+                <list>
+                    <value>Lumia 630</value>
+                </list>
+            </device>
         </builder>
         <builder class="org.apache.devicemap.simpleddr.builder.device.SymbianDeviceBuilder">
         </builder>
         <builder class="org.apache.devicemap.simpleddr.builder.device.TwoStepDeviceBuilder">
         </builder>
         <builder class="org.apache.devicemap.simpleddr.builder.device.SimpleDeviceBuilder">
+            <device id="genericWebBot">
+                <list>
+                    <value>adidxbot</value>
+                    <value>AdsBot</value>
+                    <value>Apache</value>
+                    <value>AppEngine</value>
+                    <value>BuiBui-Bot</value>
+                    <value>CCBot</value>
+                    <value>ContextAd Bot</value>
+                    <value>CRAZYWEBCRAWLER</value>
+                    <value>curl</value>
+                    <value>deWinkel</value>
+                    <value>Facebot</value>
+                    <value>FastCurl_1.0_0.6</value>
+                    <value>Google-HTTP-Java-Client/1.17.0-rc (gzip)</value>
+                    <value>gsa-crawler</value>
+                    <value>HP ProtectTools Security Manager</value>
+                    <value>ia_archiver</value>
+                    <value>Icarus6j</value>
+                    <value>Iceleads landingpage checker</value>
+                    <value>Jakarta</value>
+                    <value>java</value>
+                    <value>LinkWalker</value>
+                    <value>LivelapBot</value>
+                    <value>MacOutlook</value>
+                    <value>magpie-crawler</value>
+                    <value>Mediapartners-Google</value>
+                    <value>MetaURI</value>
+                    <value>Microsoft Lync</value>
+                    <value>Microsoft Office</value>
+                    <value>Microsoft URL Control</value>
+                    <value>pegasusmonitoring.com</value>
+                    <value>Pingdom.com</value>
+                    <value>Pinterest</value>
+                    <value>psbot</value>
+                    <value>python</value>
+                    <value>QuerySeekerSpider</value>
+                    <value>Ruby</value>
+                    <value>Scrapy</value>
+                    <value>ShopZoeker</value>
+                    <value>Site24x7</value>
+                    <value>Sogou</value>
+                    <value>TweetmemeBot</value>
+                    <value>Twitterbot</value>
+                    <value>WatchMouse</value>
+                    <value>wget</value>
+                    <value>WinHttp</value>
+                    <value>Wotbox</value>
+                    <value>WWW-Mechanize</value>
+                    <value>Xenu</value>
+                    <value>Yahoo Pipes</value>
+                    <value>YahooCacheSystem</value>
+                </list>
+            </device>
         </builder>
     </Builders>
 </ODDR>
