@@ -9,23 +9,19 @@ import com.vlkan.whatismyuseragent.devicemap.DeviceAttributes;
 import com.vlkan.whatismyuseragent.devicemap.DeviceProfile;
 import com.vlkan.whatismyuseragent.devicemap.DeviceProfilerService;
 import com.vlkan.whatismyuseragent.devicemap.IllegalUserAgentException;
-import com.vlkan.whatismyuseragent.devicemap.apache.ApacheDeviceAttributes;
+import com.vlkan.whatismyuseragent.github.GitHubIssueConflict;
+import com.vlkan.whatismyuseragent.github.GitHubIssueSubmitter;
 import lombok.extern.slf4j.Slf4j;
-import org.kohsuke.github.GHIssueState;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GitHub;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -55,9 +51,10 @@ public final class MainResource {
     @Timed
     public MainView getMain(@Context HttpServletRequest request) {
         checkNotNull(request, "request");
+        String remoteAddress = request.getRemoteAddr();
         Optional<String> userAgent = Optional.ofNullable(request.getHeader("User-Agent"));
         Optional<? extends DeviceProfile> deviceProfile = findDeviceProfile(userAgent);
-        return new MainView(userAgent, deviceProfile);
+        return new MainView(remoteAddress, userAgent, deviceProfile);
     }
 
     private Optional<DeviceProfile> findDeviceProfile(Optional<String> optUserAgent) {
@@ -69,29 +66,33 @@ public final class MainResource {
 
     @POST
     @Timed
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void submitDeviceProfile(MultivaluedMap<String, String> params, @Context HttpServletRequest request) throws IOException {
+    public URL submitDeviceProfile(MultivaluedMap<String, String> params, @Context HttpServletRequest request) throws IOException {
         checkNotNull(params, "form parameters");
         checkNotNull(request, "request");
+        String remoteAddress = request.getRemoteAddr();
         String userAgent = Optional.ofNullable(request.getHeader("User-Agent"))
                 .orElseThrow(() -> new IllegalArgumentException("missing User-Agent"));
         ImmutableMap<String, String> attributes = ImmutableMap.<String, String>builder()
-                .putAll(extractApacheAttributes(params))
+                .putAll(extractAttributes(params))
                 .put("deviceType", params.getFirst("deviceType"))
+                .put("remoteAddress", remoteAddress)
                 .put("userAgent", userAgent)
                 .build();
         String checksum = checksum(attributes);
-        submitGitHubIssue(checksum, attributes);
+        return submitGitHubIssue(checksum, attributes);
     }
 
-    private static ImmutableMap<String, String> extractApacheAttributes(MultivaluedMap<String, String> params) {
-        return ApacheDeviceAttributes.VALID_ATTRIBUTES.stream()
+    private ImmutableMap<String, String> extractAttributes(MultivaluedMap<String, String> params) {
+        return validDeviceAttributes.stream()
+                .filter(params::containsKey)
                 .collect(toImmutableMap(Function.identity(),
                         (key) -> Optional.ofNullable(params.getFirst(key)).map(String::trim).get()));
     }
 
     private static String checksum(ImmutableMap<String, String> attributes) {
-        Hasher hasher = Hashing.sha256().newHasher();
+        Hasher hasher = Hashing.murmur3_32().newHasher();
         attributes.keySet().stream().sorted().forEach(key -> {
             Optional<String> value = Optional.ofNullable(attributes.get(key)).map(String::trim).map(String::toLowerCase);
             hasher.putString(value.toString(), Charset.defaultCharset());
@@ -99,33 +100,10 @@ public final class MainResource {
         return hasher.hash().toString();
     }
 
-    private void submitGitHubIssue(String checksum, ImmutableMap<String, String> attributes) throws IOException {
+    private URL submitGitHubIssue(String checksum, ImmutableMap<String, String> attributes) throws IOException {
         log.trace("Submitting GitHub Issue: checksum={}, attributes={}", checksum, attributes);
-        GitHub github = GitHub.connect();
-        GHRepository repository = github.getRepository(repositoryName);
-        if (gitHubIssueExists(repository, checksum)) log.trace("GitHub issue already exists!");
-        else createGitHubIssue(repository, checksum, attributes);
-    }
-
-    private static boolean gitHubIssueExists(GHRepository repository, String checksum) {
-        return Arrays.stream(GHIssueState.values())
-                .map(state -> {
-                    try {
-                        return repository
-                                .getIssues(state).stream()
-                                .anyMatch(issue -> issue.getTitle().contains(checksum));
-                    } catch (IOException exception) {
-                        log.error("failed to retrieve GitHub issues of state " + state, exception);
-                        return false;
-                    }
-                }).findFirst().orElse(false);
-    }
-
-    private static void createGitHubIssue(GHRepository repository, String checksum, ImmutableMap<String, String> attributes) throws IOException {
-        repository
-                .createIssue(String.format("Device Profile Submission [%s]", checksum))
-                .label("device-profile")
-                .create();
+        try { return GitHubIssueSubmitter.of(repositoryName, checksum, attributes).submit(); }
+        catch (GitHubIssueConflict exception) { throw new WebApplicationException(Response.Status.CONFLICT); }
     }
 
 }
