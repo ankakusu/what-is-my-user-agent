@@ -1,4 +1,4 @@
-repositoryName: what-is-my-user-agent
+repositoryName: vy/what-is-my-user-agent
 
 viewRendererConfiguration:
     .mustache:
