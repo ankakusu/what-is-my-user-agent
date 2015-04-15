@@ -1,11 +1,9 @@
 package com.vlkan.whatismyuseragent;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.vlkan.whatismyuseragent.devicemap.DeviceAttributes;
-import com.vlkan.whatismyuseragent.devicemap.DeviceProfilerService;
 import com.vlkan.whatismyuseragent.devicemap.apache.ApacheDeviceAttributes;
 import com.vlkan.whatismyuseragent.devicemap.apache.ApacheDeviceProfilerService;
+import com.vlkan.whatismyuseragent.github.GitHubHealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -50,6 +48,7 @@ public final class MainApplication extends Application<MainConfiguration> {
         log.info("Starting the application...");
         checkNotNull(configuration, "main configuration");
         checkNotNull(environment, "environment");
+        environment.healthChecks().register("GitHub", new GitHubHealthCheck(configuration.getRepositoryName()));
         environment.jersey().register(
                 new MainResource(
                         configuration.getRepositoryName(),
