@@ -68,7 +68,7 @@ public class GitHubIssueSubmitter {
                         .map(entry -> String.format("%s: %s", entry.getKey(), entry.getValue()))
                         .collect(joining("\n")))
                 .create()
-                .getUrl();
+                .getHtmlUrl();
     }
 
 }
