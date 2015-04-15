@@ -1,14 +1,14 @@
 package com.vlkan.whatismyuseragent.devicemap.attribute;
 
+import com.vlkan.whatismyuseragent.util.MatchableEnumeration;
 import lombok.Getter;
 
 import java.util.function.Predicate;
 
-import static com.vlkan.whatismyuseragent.util.Enumerations.parseEnumeration;
 import static com.vlkan.whatismyuseragent.util.Preconditions.checkNotNull;
 import static com.vlkan.whatismyuseragent.util.Predicates.*;
 
-public enum MobileBrowser implements AttributeMatcher {
+public enum MobileBrowser implements MatchableEnumeration {
 
     ACCESS_NETFRONT ("Access Netfront",     equalsIgnoreCase("access netfront")),
     ANDROID_WEBKIT  ("Android Webkit",      equalsIgnoreCase("android webkit")),
@@ -41,7 +41,7 @@ public enum MobileBrowser implements AttributeMatcher {
     }
 
     public static MobileBrowser parse(String name) {
-        return parseEnumeration(name, values(), UNKNOWN);
+        return MatchableEnumeration.parseEnumeration(name, values(), UNKNOWN);
     }
 
     @Override

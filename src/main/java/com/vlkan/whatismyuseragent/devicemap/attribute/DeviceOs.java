@@ -1,14 +1,14 @@
 package com.vlkan.whatismyuseragent.devicemap.attribute;
 
+import com.vlkan.whatismyuseragent.util.MatchableEnumeration;
 import lombok.Getter;
 
 import java.util.function.Predicate;
 
-import static com.vlkan.whatismyuseragent.util.Enumerations.parseEnumeration;
 import static com.vlkan.whatismyuseragent.util.Preconditions.checkNotNull;
 import static com.vlkan.whatismyuseragent.util.Predicates.*;
 
-public enum DeviceOs implements AttributeMatcher {
+public enum DeviceOs implements MatchableEnumeration {
 
     ANDROID     ("Android",     equalsIgnoreCase("android")),
     BADA        ("Bada",        startsWithIgnoreCase("bada")),
@@ -40,7 +40,7 @@ public enum DeviceOs implements AttributeMatcher {
     }
 
     public static DeviceOs parse(String name) {
-        return parseEnumeration(name, values(), UNKNOWN);
+        return MatchableEnumeration.parseEnumeration(name, values(), UNKNOWN);
     }
 
     @Override

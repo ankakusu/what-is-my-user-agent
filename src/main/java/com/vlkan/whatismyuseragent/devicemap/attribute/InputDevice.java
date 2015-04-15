@@ -1,5 +1,6 @@
 package com.vlkan.whatismyuseragent.devicemap.attribute;
 
+import com.vlkan.whatismyuseragent.util.MatchableEnumeration;
 import lombok.Getter;
 
 import java.util.function.Predicate;
@@ -7,9 +8,8 @@ import java.util.function.Predicate;
 import static com.vlkan.whatismyuseragent.util.Preconditions.checkNotNull;
 import static com.vlkan.whatismyuseragent.util.Predicates.alwaysFalse;
 import static com.vlkan.whatismyuseragent.util.Predicates.equalsIgnoreCase;
-import static com.vlkan.whatismyuseragent.util.Enumerations.parseEnumeration;
 
-public enum InputDevice implements AttributeMatcher {
+public enum InputDevice implements MatchableEnumeration {
 
     CLICKWHEEL  ("ClickWheel",  equalsIgnoreCase("clickwheel")),
     JOYSTICK    ("JoyStick",    equalsIgnoreCase("joystick")),
@@ -28,7 +28,7 @@ public enum InputDevice implements AttributeMatcher {
     }
 
     public static InputDevice parse(String name) {
-        return parseEnumeration(name, values(), UNKNOWN);
+        return MatchableEnumeration.parseEnumeration(name, values(), UNKNOWN);
     }
 
     @Override
