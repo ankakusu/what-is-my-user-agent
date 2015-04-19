@@ -1,0 +1,53 @@
+/* remove inset shadow on iPad form fields */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"] {
+    -webkit-appearance: none;
+}
+
+.form-group {
+    margin-bottom: $grid-gutter-width / 2;
+}
+
+.form-group label + div {
+    padding-top: 6px;
+}
+
+.form-control {
+    border: 2px solid $input-border-color;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    height: 40px;
+    padding: 8px 12px;
+}
+
+.form-control.small {
+    width: 71px;
+}
+
+.form-control.medium {
+    width: 140px;
+}
+
+.form-control.large {
+    width: 100%;
+    @media (min-width: $screen-xs) {
+        width: 261px;
+    }
+}
+
+.form-horizontal .control-label {
+    padding-bottom: 6px;
+
+    @media (min-width: $screen-sm) {
+        padding-top: 8px;
+    }
+}
+
+input[type="checkbox"] {
+    border: 2px solid $input-border-color;
+    width: 20px;
+    height: 20px;
+
+}

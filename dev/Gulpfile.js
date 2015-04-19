@@ -10,8 +10,8 @@ function standardHandler(err) {
 
 gulp.task('sass', function() {
     return gulp.src('./scss/style.scss')
-        .on('error', standardHandler)
         .pipe(sass(({sourcemap: true})))
+        .on('error', standardHandler)
         .pipe(gulp.dest('./'));
 });
 
